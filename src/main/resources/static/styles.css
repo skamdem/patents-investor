@@ -1,0 +1,140 @@
+body {
+  font-size: 14px;
+  /*background: url("./img/stock_exchange.jpg");
+  background-repeat: no-repeat;*/
+  background-color:#f4f4f4;
+  /*top and bottom margins are together 0px
+    right and left margins are together 0px*/
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom : 100px;
+  margin-top: 140px;
+  /*border : 2px solid red;*/
+}
+
+/*=====START HEADER navigation in fragments=========*/
+#showcase{
+    /*light abstract blue image with tools settings = LARGE*/
+    background-image: url('/img/showcase.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-height: 100px;
+    /*margin-bottom: 30px;
+    border : 2px solid pink;*/
+    background-position: center;
+    text-align: center;
+}
+/*=====END HEADER navigation in fragments=========*/
+
+.error {
+  color: red;
+}
+
+.search label {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+a {
+  color: coral;
+}
+
+
+/*=== Start divs Above tables in various pages ===*/
+.merge-with-background {
+  background-color:#f4f4f4;
+  border-style: none;
+}
+/*=== End divs Above tables in various pages ===*/
+
+/*============START FIXING FOOTER=====================*/
+#footer-showcase {
+    padding : 0px;
+}
+
+#footer-showcase div {
+    /*light abstract blue image with tools settings = LARGE*/
+    background-image: url('/img/showcase.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 50px;
+    color:white;
+
+    text-align: center;
+    width: 100%;
+    background-position: center;
+}
+/*============END FIXING FOOTER=====================*/
+
+/*=====START FIXING ARROWS ICONS in table of listing stock display===========*/
+.flex-sort-group {
+  /*display: flex;
+  width: 15px;
+  padding: 0px;
+  background-color: green;
+  border : 1px solid pink;*/
+  flex-direction: row;
+  display: inline-flex;
+}
+
+.flex-sort-group > div {
+    display: flex;
+    align-items: center;
+    /*border : 1px solid blue;
+    display: -webkit-flex;*/
+}
+
+.flex-arrow-pairs {
+  display: flex;
+  width: 15px;
+  padding: 0px;
+  flex-direction: column;
+  /*border : 1px solid red;
+  background-color: DodgerBlue;*/
+}
+
+.hide {
+    visibility: hidden;
+}
+
+ .flex-arrow-pairs > div {
+   width: 15px;
+   /*top and bottom margins are 0px
+     right and left margins are 0px*/
+   margin: 0px 0px;
+   padding: 0px;
+   /*border : 1px solid yellow;*/
+ }
+
+.arrow-up {
+    position:relative;
+    top:2px;
+    /*border : 1px solid yellow;*/
+}
+
+.arrow-down {
+    position:relative;
+    bottom:2px;
+}
+/*============END FIXING ARROWS ICONS=====================*/
+
+/*============START In template/index=====================*/
+.front-page {
+    display: flex;
+    flex-direction: row;
+    /*background-color: DodgerBlue;*/
+}
+
+.badger {
+    width : 50%;
+    /*border: 1px solid blue;*/
+}
+
+.badger-right {
+    width : 50%;
+    /*border: 1px solid blue;*/
+    min-height:265px;
+    background-repeat: no-repeat;
+    background-image: url('/img/patents_256x256px.jpg');
+}
+/*============END In template/index=====================*/

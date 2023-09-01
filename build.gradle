@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'org.launchcode'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '13'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+// tag::repositories[]
+repositories {
+	mavenCentral()
+}
+// end::repositories[]
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.2.7.RELEASE'
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.security:spring-security-crypto'
+		implementation 'org.springframework.data:spring-data-commons:2.2.6.RELEASE'
+		implementation 'org.springframework.security:spring-security-core:5.1.4.RELEASE'
+		implementation 'org.springframework.security:spring-security-web:5.3.2.RELEASE'
+		implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
+		implementation 'mysql:mysql-connector-java'
+		implementation 'org.thymeleaf:thymeleaf-spring5:3.0.11.RELEASE'
+		implementation 'org.webjars:bootstrap:4.4.1-1'
+		implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+		implementation 'com.fasterxml.jackson.core:jackson-core:2.11.0'
+		developmentOnly 'org.springframework.boot:spring-boot-devtools'
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+	}
+
+test {
+	useJUnitPlatform()
+}

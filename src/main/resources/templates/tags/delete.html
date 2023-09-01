@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+<div th:replace="fragments :: header"></div>
+<div th:replace="fragments :: messages"></div>
+
+<form method="POST">
+    <table class="table table-striped">
+        <tr th:each="tag : ${tags}">
+            <td>
+                <span th:text="'#'+${tag.name}"></span>
+            </td>
+            <td>
+                <input type="checkbox"
+                       name="tagIds"
+                       th:value="${tag.id}"
+                       class="form-control">
+            </td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit"
+               id="confirmDeletion"
+               value="Delete Tag"
+               class="btn btn-danger deletion">
+        <a  th:href="@{${'/tags'}}"
+            class="btn btn-info">
+            Cancel
+        </a>
+    </div>
+</form>
+
+<script type="text/javascript"
+        th:src="@{/confirmDeletion.js}"></script>
+
+<div th:insert="fragments :: footer"></div>
+
+</body>
+</html>

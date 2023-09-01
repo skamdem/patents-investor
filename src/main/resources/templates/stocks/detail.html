@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<div th:replace="fragments :: header"></div>
+<div th:replace="fragments :: messages"></div>
+
+<div class="row">
+    <div class="col-md-6 text-left merge-with-background">
+        <h4 class="card-text">
+            $ <span th:style="'color:green'"
+                    th:text="${stock.stockDetails.latestPrice}">0</span>
+        </h4>
+        <p class="card-text">
+            Last Trade : <span th:text="${stock.stockDetails.getLastTradeTime()}">0</span>
+        </p>
+    </div>
+    <div class="col-md-6 text-right merge-with-background">
+        <h4 class="card-text">
+                    <span th:style="'color:green'"
+                          th:text="${#numbers.formatDecimal(stock.stockDetails.getTotalNumberOfPatents(), 0, 'COMMA', 0, 'POINT')}">0</span>
+            patents registered
+        </h4>
+        <p class="card-text">
+            Last update : <span th:text="${stock.stockDetails.getLastUsptoApiUpdate()}"></span>
+        </p>
+    </div>
+</div>
+
+<div th:if="${website}"
+     th:style="'text-align: center; display: block;'"
+     th:alt-title="'Visit website of ' + ${stock.ticker}"
+     class="row">
+    <a target="_blank" th:href="${website}">
+        <img th:src="${logoUrl}"/>
+    </a>
+    <br>
+</div>
+
+<div th:if="${website}" class="row">
+    <div class="col-md-12">
+        <h6 th:text="'Description of ' + ${stock.getTicker()} + ':&nbsp;'"
+            th:style="'display:block'">
+        </h6>
+        <div th:style="'text-align: justify'" th:text="' ' + ${description}"></div>
+        <br>
+    </div>
+</div>
+
+<table class="table table-borderless table-hover table-striped table-dark">
+    <tr>
+        <th>Full name of company :</th>
+        <td th:text="${stock.getStockDetails().getCompanyName()}"></td>
+    </tr>
+    <tr>
+        <th>Primary listing exchange :</th>
+        <td th:with="key=${stock.stockDetails.getExchange()}"
+            th:text="${exchangePlatforms.get(key)}"></td>
+    </tr>
+    <th:block th:if="${website}">
+        <tr>
+            <th>Industry / Sector :</th>
+            <td th:text="${industry} + ' / ' + ${sector}"></td>
+        </tr>
+        <tr>
+            <th>Employees :</th>
+            <td th:text="${#numbers.formatDecimal(employees, 0, 'COMMA', 0, 'POINT')} + ' people'"></td>
+        </tr>
+        <tr>
+            <th>CEO :</th>
+            <td th:text="${CEO}"></td>
+        </tr>
+        <tr>
+            <th>Website :</th>
+            <td><a th:text="${website}" target="_blank"
+                   th:alt-title="'Visit website of ' + ${stock.ticker}" class="row"
+                   th:href="${website}">
+            </a>
+            </td>
+        </tr>
+        <tr>
+            <th>Address :</th>
+            <td th:text="${address} + ' ' + ${city} + ' ' + ${state} + ' ' + ${zip} + ' ' + ${country}"></td>
+        </tr>
+        <tr>
+            <th>Phone :</th>
+            <td th:text="${phone}"></td>
+        </tr>
+    </th:block>
+
+    <tr th:if="${isLoggedIn}">
+        <th>List of tags :</th>
+        <td>
+            <span th:unless="${relevantTags.size()} > 0"
+                  th:text="'No tag set for this stock'"
+            ></span>
+            <th:block th:if="${relevantTags.size()>=1}">
+                <th:block th:each="tag : ${relevantTags}">
+                    <a th:text="${tag.getDisplayName()} + ' '"
+                       th:alt-title="'View details of ' + ${tag.getDisplayName()}"
+                       th:href="'/stocks/?tagId='+${tag.id}">
+                    </a>
+                    <!--a th:text="'#'+${tag.name}"
+                       th:href="'/tags/view/'+${tag.id}">
+                    </a-->
+                </th:block>
+            </th:block>
+        </td>
+    </tr>
+    <tr th:if="${(isLoggedIn) and (inPortfolio != null)}">
+        <th>Number of shares in portfolio :</th>
+        <td th:text="${numberOfShares}"></td>
+    </tr>
+</table>
+
+<th:block th:if="${isLoggedIn}">
+
+    <a th:if="${inPortfolio == null}"
+       th:href="@{${'/stocks/add-to-portfolio/'+stock.id}}"
+       th:alt-title="'Add ' + ${stock.ticker} + ' to portfolio'"
+       class="btn btn-success mb-3">
+        Add to portfolio
+    </a>
+
+    <a th:unless="${relevantTags.size() >= MAX_NUMBER_OF_TAGS}"
+       th:href="@{${'/stocks/add-tag/'+stock.id}}"
+       th:alt-title="'Add an investment field to ' + ${stock.ticker}"
+       class="btn btn-primary mb-3">
+        Add tag
+    </a>
+
+    <a th:unless="${relevantTags.size() < 1}"
+       th:href="@{${'/stocks/remove-tag/'+stock.id}}"
+       th:alt-title="'Remove an investment field from ' + ${stock.ticker}"
+       class="btn btn-warning mb-3">
+        Remove tag
+    </a>
+
+</th:block>
+
+<div th:insert="fragments :: footer"></div>
+</body>
+</html>
