@@ -2,7 +2,7 @@
 set -exuo pipefail
 
 # clean occasional previous image
-docker rmi websurfer21/patentsInvestor:date || echo "image did not exist, proceding..."
+docker rmi websurfer21/patentsInvestor:date || echo "image did not exist, proceeding..."
 
 # docker build -t <docker_hub_user_name>/<image_name>:<tag_name> /path/to/dockerfile
 # launch new image named "websurfer21/patentsInvestor:date"
